@@ -1,4 +1,4 @@
-const { v4: uuidv4 } = require("uuid");
+import { v4 as uuidv4 } from 'uuid';  
 
 let projects = [
   {
@@ -21,25 +21,20 @@ let projects = [
   },
 ];
 
-function getAllProjects() {
+export function getAllProjects() {
   return projects;
 }
 
-function createProject(data) {
-    const newProject = {
-      id: uuidv4(),
-      name: data.name,
-      description: data.description,
-      startDate: data.startDate,
-      endDate: data.endDate,
-      status: data.status,
-      budget: data.budget
-    };
-    projects.push(newProject);
-    return newProject;
-}
-
-module.exports = {
-  getAllProjects,
-  createProject
+export function createProject(data) {
+  const newProject = {
+    id: uuidv4(),
+    name: data.name,
+    description: data.description,
+    startDate: data.startDate,
+    endDate: data.endDate,
+    status: data.status,
+    budget: data.budget,
+  };
+  projects.push(newProject);
+  return newProject;
 }

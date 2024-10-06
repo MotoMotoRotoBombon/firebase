@@ -1,17 +1,18 @@
-const jwt = require('jsonwebtoken');
-const JWT_SECRET = require('../controllers/authController').JWT_SECRET;
+import jwt from 'jsonwebtoken'; 
+import { JWT_SECRET } from '../controllers/authController.js'; 
 
 function authenticateToken(req, res, next) {
   const authHeader = req.headers['authorization'];
   console.log(authHeader);
   const token = authHeader && authHeader.split(' ')[1];
-  if(!token)
-    return res.status(403).json({ code:403, message: 'Token requerido' });
+  if (!token) {
+    return res.status(403).json({ code: 403, message: 'Token requerido' });
+  }
 
-  jwt.verify(token, JWT_SECRET, (err, user) =>{
+  jwt.verify(token, JWT_SECRET, (err, user) => {
     console.log(err);
-    if(err) {
-      switch(err.name) {
+    if (err) {
+      switch (err.name) {
         case 'JsonWebTokenError':
           return res.status(403).json({ code: 403, message: 'Token inválido' });
         case 'TokenExpiredError':
@@ -26,4 +27,4 @@ function authenticateToken(req, res, next) {
   });
 }
 
-module.exports = authenticateToken;
+export default authenticateToken; 

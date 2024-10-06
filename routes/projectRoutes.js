@@ -1,14 +1,10 @@
-const express = require('express');
-
-const projectController 
-    = require('../controllers/projectController');
-
-const authenticateToken = 
-    require('../middleware/authMiddleware');
+import express from 'express';
+import { getAllProjects, createProject } from '../controllers/projectController.js';  
+import authenticateToken from '../middleware/authMiddleware.js'; 
 
 const router = express.Router();
 
-router.get('/', authenticateToken, projectController.getAllProjects);
-router.post('/', authenticateToken, projectController.createProject);
+router.get('/', authenticateToken, getAllProjects);
+router.post('/', authenticateToken, createProject);
 
-module.exports = router;
+export default router;  
